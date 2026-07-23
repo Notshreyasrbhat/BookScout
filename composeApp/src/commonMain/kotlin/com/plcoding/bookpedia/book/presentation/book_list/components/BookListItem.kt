@@ -51,24 +51,24 @@ fun BookListItem(
 )
 {
     Surface(
-        shape= RoundedCornerShape(32.dp),
+        shape = RoundedCornerShape(32.dp),
         modifier = modifier
             .clickable(onClick = onClick),
         color = LightBlue.copy(alpha = 0.2f)
-    ){
+    ) {
         Row(
-            modifier=modifier
+            modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()
                 .height(IntrinsicSize.Min),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ){
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
             Box(
-                modifier = modifier
+                modifier = Modifier
                     .height(100.dp),
                 contentAlignment = Alignment.Center
-            ){
+            ) {
                 var imageLoadResult by remember {
                     mutableStateOf<Result<Painter>?>(null)
                 }
