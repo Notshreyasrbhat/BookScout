@@ -170,67 +170,65 @@ private fun BookListScreen(
                         )
                     }
                 }
-            }
-            Spacer(modifier = Modifier.height(4.dp))
-            HorizontalPager(
-                state = pagerState,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-            ) { pageIndex ->
-                Box(
+                Spacer(modifier = Modifier.height(4.dp))
+                HorizontalPager(
+                    state = pagerState,
                     modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    when (pageIndex) {
-                        0 -> {
-                            if (state.isLoading) {
-                                CircularProgressIndicator()
-                            } else {
-                                when {
-                                    state.errorMessage != null -> {
-                                        Text(
-                                            text = state.errorMessage.asString(),
-                                            textAlign = TextAlign.Center,
-                                            style = MaterialTheme.typography.headlineSmall,
-                                            color = MaterialTheme.colorScheme.error
-                                        )
-                                    }
+                        .fillMaxWidth()
+                        .weight(1f)
+                ) { pageIndex ->
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        when (pageIndex) {
+                            0 -> {
+                                if (state.isLoading) {
+                                    CircularProgressIndicator()
+                                } else {
+                                    when {
+                                        state.errorMessage != null -> {
+                                            Text(
+                                                text = state.errorMessage.asString(),
+                                                textAlign = TextAlign.Center,
+                                                style = MaterialTheme.typography.headlineSmall,
+                                                color = MaterialTheme.colorScheme.error
+                                            )
+                                        }
 
-                                    state.searchResults.isEmpty() -> {
-                                        Text(
-                                            text = stringResource(Res.string.no_search_results),
-                                            textAlign = TextAlign.Center,
-                                            style = MaterialTheme.typography.headlineSmall,
-                                            color = MaterialTheme.colorScheme.error
-                                        )
-                                    }
+                                        state.searchResults.isEmpty() -> {
+                                            Text(
+                                                text = stringResource(Res.string.no_search_results),
+                                                textAlign = TextAlign.Center,
+                                                style = MaterialTheme.typography.headlineSmall,
+                                                color = MaterialTheme.colorScheme.error
+                                            )
+                                        }
 
-                                    else -> {
-                                        BookList(
-                                            books = state.searchResults,
-                                            onBookClick = {
-                                                onAction(BookListAction.OnBookClick(it))
-                                            },
-                                            modifier = Modifier.fillMaxSize(),
-                                            scrollState = searchResultsListState
-                                        )
+                                        else -> {
+                                            BookList(
+                                                books = state.searchResults,
+                                                onBookClick = {
+                                                    onAction(BookListAction.OnBookClick(it))
+                                                },
+                                                modifier = Modifier.fillMaxSize(),
+                                                scrollState = searchResultsListState
+                                            )
 
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        1 -> {
-                                if(state.favoritesBooks.isEmpty()){
+                            1 -> {
+                                if (state.favoritesBooks.isEmpty()) {
                                     Text(
                                         text = stringResource(Res.string.no_favorite_books),
                                         textAlign = TextAlign.Center,
                                         style = MaterialTheme.typography.headlineSmall,
                                     )
-                                }
-                            else{
+                                } else {
                                     BookList(
                                         books = state.favoritesBooks,
                                         onBookClick = {
@@ -240,12 +238,11 @@ private fun BookListScreen(
                                         scrollState = favoriteBooksListState
                                     )
                                 }
+                            }
                         }
                     }
                 }
             }
-
         }
-
     }
 }
